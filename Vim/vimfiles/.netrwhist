@@ -1,0 +1,5 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='d:/working/work'
+let g:netrw_dirhist_2='C:\Windows\system32'
+let g:netrw_dirhist_3='E:\work'
