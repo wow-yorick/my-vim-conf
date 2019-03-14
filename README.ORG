@@ -1,4 +1,5 @@
 VIM配置FOR(php go)
+
 ========================
 基于Vundle进行包管理
 
@@ -9,6 +10,9 @@ VIM配置FOR(php go)
 * 安装
 1. 确保安装了git curl 工具
 2. 安装插件 打开vim  运行 ~:PluginInstall~
+
+* 自动安装脚本
+:: 运行 ./install.sh 
 
 * 说明
 * .vimrc为配置文件
