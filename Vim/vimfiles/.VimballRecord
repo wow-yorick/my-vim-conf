@@ -1,1 +1,0 @@
-supertab.vmb: call delete('d:\Program Files\Vim\vimfiles/doc/supertab.txt')|call delete('d:\Program Files\Vim\vimfiles/plugin/supertab.vim')

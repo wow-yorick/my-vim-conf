@@ -1,3 +1,53 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"      vundle插件包管理
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+"Bundle 'Valloric/YouCompleteMe'
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+"Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+"Plugin 'L9'
+"Plugin 'https://github.com/juneedahamed/svnj.vim.git'
+" Git plugin not hosted on GitHub
+"Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+"Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Avoid a name conflict with L9
+"Plugin 'user/L9', {'name': 'newL9'}
+Plugin 'lucius'
+Plugin 'scrooloose/nerdtree'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " 执行 VIM 缺省提供的 .vimrc文件的示例，包含了打开语法高亮显示等最常用的功能
 source $VIMRUNTIME/vimrc_example.vim
 "使%可以匹配html标签对
@@ -14,15 +64,6 @@ set backspace=2
 "在缩进和遇到 Tab 键时使用空格替代
 set expandtab
 set fdm=indent "indent marker syntax
-"根据文件类型设置缩进格式
-
-"au FileType html,python,vim,javascript setl shiftwidth=2
-
-"au FileType html,python,vim,javascript setl tabstop=2
-
-"au FileType java,php setl shiftwidth=4
-
-"au FileType java,php setl tabstop=4
 
 " 处理文本中显示乱码
 set encoding=utf-8
@@ -30,8 +71,8 @@ set fileencodings=chinese
 set fileencoding=chinese
 
 " 处理菜单及右键菜单乱码
-source $vimruntime/delmenu.vim
-source $vimruntime/menu.vim
+source $HOME/.vim/plugin/delmenu.vim
+source $HOME/.vim/plugin/menu.vim
 
 " 处理consle输出乱码
 language messages zh_cn.utf-8
@@ -120,7 +161,7 @@ set matchtime=1
 set hidden
 
 " 启动后最大化
-au GUIEnter * simalt ~x
+" au GUIEnter * simalt ~x
 
 " 显示TAB健
 "set list
@@ -156,7 +197,7 @@ inoremap '' ''<Left>
 "设置session选项
 set sessionoptions=buffers,curdir,resize,folds
 " 设置SESSION保存目录  
-autocmd VimLeave * mks! $VIM\Data\Session.vim 
+autocmd VimLeave * mks! $HOME/.vim/Data/Session.vim 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "      函数
@@ -254,12 +295,12 @@ let Tlist_Inc_Winwidth = 0
 nnoremap <C-F11> :TlistToggle<CR> 
 " 设置ctags运行的位置 let Tlist_Ctags_Cmd = 'ctags.exe' 
 " 设置tags文件目录
-set tags+=$VIM\Data\tags
+set tags+=$HOME/.vim/Data/tags
 set autochdir
 
 " F12生成/更新tags文件
 function! UpdateTagsFile()
-   silent !ctags -a --fields=+ianS --extra=+q --tag-relative --exclude=.svn --exclude=c++ --exclude=asm*  --exclude=*.js --exclude=.* -f "D:\programFiles\Vim\Data\tags" -R 
+   silent !ctags -a --fields=+ianS --extra=+q --tag-relative --exclude=.svn --exclude=c++ --exclude=asm*  --exclude=*.js --exclude=.* -f "tags" -R 
 endfunction
 "nmap <C-F12> :call UpdateTagsFile()<CR>
 nmap <F12> :call UpdateTagsFile()<CR>
@@ -269,7 +310,7 @@ nmap <F12> :call UpdateTagsFile()<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let NERDChristmasTree=1
 let NERDTreeAutoCenter=1
-let NERDTreeBookmarksFile=$VIM.'\Data\.NERDTreeBookmarks'
+let NERDTreeBookmarksFile=$HOME.'/.vim/Data/.NERDTreeBookmarks'
 let NERDTreeMouseMode=2
 let NERDTreeShowBookmarks=0
 let NERDTreeShowFiles=1
@@ -280,15 +321,15 @@ let NERDTreeWinSize=31
 
 " F6打开目录树
 nmap <F5> :NERDTreeToggle<CR>
-:map <C-F9> :NERDTree E:\work
+:map <C-F9> :NERDTree $HOME/go
 
-autocmd VimEnter * :NERDTree E:\work
+autocmd VimEnter * :NERDTree $HOME/go
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "       php设置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " 使用PHP快速注释 Alt+P
-source $VIM\vimfiles\plugin\php-doc.vim
+source $HOME/.vim/plugin/php-doc.vim
 inoremap <M-/> <ESC>:call PhpDocSingle()<CR>
 nnoremap <M-/> :call PhpDocSingle()<CR>
 vnoremap <M-/> :call PhpDocRange()<CR>
@@ -298,17 +339,6 @@ autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 
 " 使php识别EOT字符串
 hi link phpheredoc string
-
-" PHP支持折叠
-let php_folding = 0
-"支持php重构
-let g:php_refactor_command='php D:/programFiles/Vim/vimfiles/refactor.phar'
-
-"php缩进
-let PHP_autoformatcomment=1
-
-" php启动帮助 快捷键普通模式下K
-autocmd BufNewFile,Bufread *.ros,*.inc,*.php set keywordprg="help"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "       javascript设置
@@ -334,70 +364,3 @@ map <c-h> ,c<space>
 "NERDTree 跳转到当前打开的页面目录
 nn <silent><F3> :exec("NERDTree ".expand('%:h'))<CR>
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"      vundle插件包管理
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-"Bundle 'Valloric/YouCompleteMe'
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-Plugin 'L9'
-Plugin 'https://github.com/juneedahamed/svnj.vim.git'
-" Git plugin not hosted on GitHub
-"Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-"Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Avoid a name conflict with L9
-"Plugin 'user/L9', {'name': 'newL9'}
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"      lookupfile 插件设置
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:LookupFile_MinPatLength = 2               "最少输入2个字符才开始查找
-let g:LookupFile_PreserveLastPattern = 0        "不保存上次查找的字符串
-let g:LookupFile_PreservePatternHistory = 1     "保存查找历史
-let g:LookupFile_AlwaysAcceptFirst = 1          "回车打开第一个匹配项目
-let g:LookupFile_AllowNewFiles = 0              "不允许创建不存在的文件
-let g:LookupFile_SortMethod = ""                "关闭对搜索结果的字母排序
-if filereadable("E:/dev/filenametags")                "设置tag文件的名字
-let g:LookupFile_TagExpr ='"E:/dev/filenametags"'
-endif
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"      svn 插件设置
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:svnj_cache_dir = 'E:/dev/CACHE'
-compiler php
