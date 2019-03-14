@@ -122,6 +122,7 @@ if has("gui_running")
  "colorscheme default
  "colorscheme freya
  "colorscheme lucius
+    set guifont=SourceCodePro-Regular:h14
 endif
 
 colorscheme lucius
